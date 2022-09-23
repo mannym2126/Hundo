@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Manny Mayorga</title>
+    <title>Hundo: A Coding Project By Manny Mayorga</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,10 +56,72 @@
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        // Call HelloWorld
-                        function HelloWOrld()
+                        // get the values from the interface
+                        // start or controller function
+                        function getValues()
                         {
-                            alert("Hello world");
+                            // get values from the page
+                            let startValue = document.getElementById("startValue").value;
+                            let endValue = document.getElementById("endValue").value;
+
+                            // We need to validate our integers
+                            // parse into Integers
+                            startValue = parseInt(startValue);
+                            endValue = parseInt(endValue);
+
+                            if(Number.isInteger(startValue) && Number.isInteger(endValue))
+                            {
+                                // call generate numbers
+                                let numbers = generateNumbers(startValue, endValue)
+                                // call display numbers
+                                displayNumbers(numbers);
+                            }
+                            else
+                            {
+                                alert("You must enter integers.");
+                            }
+
+
+                        }
+
+                        // generate numbers from the start value to the end value
+                        // logic function(s)
+                        function generateNumbers(startValue, endValue)
+                        {
+                            let numbers = [];
+
+                            // we want to get all numbers from start to end
+                            for (let index = startValue; index <= endValue; index++)
+                            {
+                                // this will execute in a loop until index = endValue
+                                numbers.push(index);
+                            }
+
+                            return numbers;
+                        }
+
+                        // display the numbers and mark the even numbers bold
+                        // display or view function(s)
+                        function displayNumbers(numbers)
+                        {
+                            let templateRows = "";
+                            for (let index = 0; index < numbers.length; index++)
+                            {
+                                let className = ""
+                                let number = numbers[index];
+                                
+                                if(number % 2 == 0)
+                                {
+                                    className = "even";
+                                }
+                                else
+                                {
+                                    className = "odd";
+                                }
+                                templateRows += `&lt;tr&gt;&lt;td class="${className}"&gt;${number}&lt;/td&gt;&lt;/tr&gt;`;
+                            }
+
+                            document.getElementById("results").innerHTML = templateRows;
                         }
                     </code>
                     </pre>
